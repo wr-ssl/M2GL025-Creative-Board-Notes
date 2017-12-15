@@ -83,7 +83,7 @@ Fill out the "Request Demo Projects" link, submit your information, and you'll g
 Future and Microsemi have conveniently spread example content over a variety of websites which protects you from getting information overload from any one site.
 
  * http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx
-    * There are four projects available for download as .zip archives here (actually just three...)
+  * There are four projects available for download as .zip archives here (actually three because one is just a .jpg file...)
         * [Blinky LED](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/BlinkyIGLOO2.zip)
             * HDL only Libero project.  No RISC-V core.  Includes pre-built programming files (.stp and .pro) so you can flash the FPGA with only [FlashPro Express](https://www.microsemi.com/products/fpga-soc/design-resources/programming/flashpro#software) if you don't want to rebuild everything in Libero.
         * [FLiR Thermal Imaging](http://www.futureelectronics.com/en/campaign/microsemi/PublishingImages/TVBLockDiagram.jpg)
