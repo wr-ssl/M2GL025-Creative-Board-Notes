@@ -44,7 +44,7 @@ In order to program the CPU you need a compiler/linker/assembler toolchain.  For
 You can either use the above tools directly or use a vendor-branded Eclipse-based IDE, such as:
 
  * [Microsemi SoftConsole](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/softconsole#overview) Bundles Eclipse + GNU MCU extensions (OpenOCD and GCC) + some Microsemi-related examples.
- * [SiFive Freedom Fries Studio](https://www.sifive.com/products/tools/) is like SoftConsole but geared towards SiFive's product line.
+ * [SiFive Freedom Fries Studio](https://www.sifive.com/products/tools/) is like SoftConsole but geared towards SiFive's product line.  Maybe you could get it to work with the SoftConsole projects mentioned on this page -- I haven't tried.
 
  If you're just getting started with the M2GL025 creative board then you probably want SoftConsole.
 
@@ -54,16 +54,16 @@ You can either use the above tools directly or use a vendor-branded Eclipse-base
  * **Libero**: The [Silver/Free license level](https://www.microsemi.com/products/fpga-soc/design-resources/licensing) can program devices up to 25k LEs, which matches the capacity of the M2GL025 IGLOO2 part.
  * **SoftConsole**: Free.  It's just Eclipse + MCU Eclipse extensions + GCC + OpenOCD in a bundle with some Microsemi-related examples.
 
-However, IANAL and I'm not sure about the specifics of licensing for commercial works.
+However, IANAL and I'm not sure about the specifics of licensing for commercial applications.
 
 ## What's the difference between CoreRISCV_AXI4 and MiV_RV32 cores?
 
-From the Microsemi catalog:
+There are three RISC-V cores in Microsemi catalog:
  * [MiV_RV32IMA_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=903)
  * [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for float"?
  * [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
 
-I'm not sure.  It looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is deprecated?) and comes in two flavors (with and without floating point).  If you have more information please let me know!
+I'm not sure how MiV and AXI4 differ.  It looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is deprecated?) and comes in two flavors (with and without floating point).  If you have more information please let me know.
 
 One difference is in the HAL files produced by the Firmware Catalog.  See below.
 
@@ -75,15 +75,13 @@ If you use the creative board design as a basis for your own design, you could l
 
 ## Where can I get board schematics?
 
- * [Future Electronics](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx)
-Fill out the "Request Demo Projects" link, submit your information, and you'll get an email (<1min for me) with links to the board schematics and BOM in pdf format.
+ * [Future Electronics](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx).  Fill out the "Request Demo Projects" link, submit your information, and you'll get an email (<1min for me) with links to the board schematics and BOM in pdf format.
 
 ## What example projects are available as a starting point?
 
-Future and Microsemi have conveniently spread example content over a variety of websites which protects you from getting information overload from any one site.
+Future and Microsemi have conveniently spread example content content content and duplicate content across a variety of websites which protects sensitive users from getting too much information all at once.
 
-* http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx
-* There are four projects available for download as .zip archives here (actually three because one is just a .jpg file...)
+* At [this Future page](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx) there are four (ok, three) projects available for download as .zip archives:
   * [Blinky LED](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/BlinkyIGLOO2.zip)
     * HDL-only Libero project.  No RISC-V core.  Includes pre-built programming files (.stp and .pro) so you can flash the FPGA with only [FlashPro Express](https://www.microsemi.com/products/fpga-soc/design-resources/programming/flashpro#software) if you don't want to rebuild everything in Libero.
   * [FLiR Thermal Imaging](http://www.futureelectronics.com/en/campaign/microsemi/PublishingImages/TVBLockDiagram.jpg)
