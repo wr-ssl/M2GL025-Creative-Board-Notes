@@ -121,3 +121,13 @@ For a design that uses the Microsemi RISC-V core, search for 'risc' and select "
 
 **NOTE**: The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
 
+## How do I build and (re)program the original FPGA bitfile onto the board?
+
+Use the FlashPro applicatoin to program the .stp file from the [YellowBoard](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/) repo.
+
+## How do I build and (re)program the original RISC-V CPU firmware onto the board?
+
+As noted in the [YellowBoard](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/) repo, the original software is Systick_Blinky.  You might be tempted to think that the software lives in the 26F064B serial flash part, but it doesn't!  It's stored in the eNVM (embedded non-volatile memeory) of the IGLOO2.  The M2GL025 part has 256kB of eNVM and according to [UG0448](https://www.microsemi.com/document-portal/doc_download/132009-ug0448-igloo2-fpga-high-performance-memory-subsystem-user-guide) the eNVM base address is fixed at 0x6000_0000.
+
+The linker command file [Linker_Run_from_NVM.lds](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Linker_Run_from_NVM.lds) is used when you're targeting eNVM.  If you're targeting the OpenOCD debugger then you want to link the program for RAM at 0x8000_0000 (e.g., using [microsemi-riscv-ram.ld](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/Example_Software_Projects/riscv-systick-blinky/riscv_hal/microsemi-riscv-ram.ld))
+
