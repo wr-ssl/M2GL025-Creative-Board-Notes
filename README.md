@@ -84,17 +84,17 @@ Future and Microsemi have conveniently spread example content over a variety of 
 
  * http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx
   * There are four projects available for download as .zip archives here (actually three because one is just a .jpg file...)
-        * [Blinky LED](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/BlinkyIGLOO2.zip)
-            * HDL only Libero project.  No RISC-V core.  Includes pre-built programming files (.stp and .pro) so you can flash the FPGA with only [FlashPro Express](https://www.microsemi.com/products/fpga-soc/design-resources/programming/flashpro#software) if you don't want to rebuild everything in Libero.
-        * [FLiR Thermal Imaging](http://www.futureelectronics.com/en/campaign/microsemi/PublishingImages/TVBLockDiagram.jpg)
-            * Just a link to a block diagram?  Ok!
-            * Here's more information that still isn't a .zip file: http://ftm.futureelectronics.com/2017/03/future-electronics-flir-lepton-lwir-thermal-imaging-camera-demo-on-microsemi-igloo2-creative-board/
-        * [RISC-V Tic-tac-toe](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/TicTacToe%20Demo.zip)
-            * Includes two Libero HDL projects (and pre-built programming files): CoreRISCV_AXI4_BaseDesign and IGL2_CoreRISCV_AXI4_TickTacToe
-            * Includes two SoftConsole projects: riscv-systick-blinky and TickTackToe
-        * [Hello World](http://www1.futureelectronics.com/mailing/Microsemi/IGL2_RISC-V_Hello_World.zip)
-            * Includes HDL project IGL2_RISCV_Systick_Blinky and pre-built .stp programming file
-            * Includes SoftConsole project: IGL2_RISCV_Systick_Blinky (with "Alternate application file" main.c)
+   * [Blinky LED](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/BlinkyIGLOO2.zip)
+    * HDL only Libero project.  No RISC-V core.  Includes pre-built programming files (.stp and .pro) so you can flash the FPGA with only [FlashPro Express](https://www.microsemi.com/products/fpga-soc/design-resources/programming/flashpro#software) if you don't want to rebuild everything in Libero.
+   * [FLiR Thermal Imaging](http://www.futureelectronics.com/en/campaign/microsemi/PublishingImages/TVBLockDiagram.jpg)
+    * Just a link to a block diagram?  Ok!
+    * Here's more information that still isn't a .zip file: http://ftm.futureelectronics.com/2017/03/future-electronics-flir-lepton-lwir-thermal-imaging-camera-demo-on-microsemi-igloo2-creative-board/
+   * [RISC-V Tic-tac-toe](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/TicTacToe%20Demo.zip)
+    * Includes two Libero HDL projects (and pre-built programming files): CoreRISCV_AXI4_BaseDesign and IGL2_CoreRISCV_AXI4_TickTacToe
+    * Includes two SoftConsole projects: riscv-systick-blinky and TickTackToe
+   * [Hello World](http://www1.futureelectronics.com/mailing/Microsemi/IGL2_RISC-V_Hello_World.zip)
+    * Includes HDL project IGL2_RISCV_Systick_Blinky and pre-built .stp programming file
+    * Includes SoftConsole project: IGL2_RISCV_Systick_Blinky (with "Alternate application file" main.c)
 
  * https://github.com/RISCV-on-Microsemi-FPGA/uCOS
     * SoftConsole project with a Micrium uC/OS-II RISC-V port
