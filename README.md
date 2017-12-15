@@ -2,8 +2,8 @@
 
 My notes from tinkering with the Microsemi M2GL025 creative board.
 
-![GitHub Logo](/images/Microsemi_Board_IMG_9611_tn.jpg)
-![GitHub Logo](/images/RISC-V_yellow_board_tn.png)
+[![Blue Board](/images/Microsemi_Board_IMG_9611_tn.jpg)](/images/Microsemi_Board_IMG_9611.jpg)
+![Yellow Board](/images/RISC-V_yellow_board_tn.png)
 
 (Looks like it was originally done up in blue and got a new silkscreen job in 2017.  I don't see any changes to PCB routing or parts placement between the two).
 
