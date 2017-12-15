@@ -8,11 +8,14 @@ This page has my notes from tinkering with the Microsemi M2GL025 creative board.
 
 It's a USD$99 evaluation board from Microsemi that implements a RISC-V CPU system in a 25kLE IGLOO2 FPGA.
 
-    * IGLOO2 M2GL025-VF256 flash-based FPGA
-    * 64MB DDR2 SDRAM (Alliance AS4C32M16D2A-25BCN)
-    * 8MB SPI flash (Microchip 26F064B)
-    * Integrated FT4232-based FlashPro5 USB JTAG adapter
-    * Pin headers compatible with various popular hobbyist boards (Arduino, mikroBUS (MikroElektronika), and PMod (digilent))
+ * IGLOO2 M2GL025-VF256 flash-based FPGA
+ * 64MB DDR2 SDRAM (Alliance AS4C32M16D2A-25BCN)
+ * 8MB SPI flash (Microchip 26F064B)
+ * Integrated FT4232-based FlashPro5 USB JTAG adapter
+ * Pin headers compatible with various popular hobbyist boards:
+   * Arduino
+   * mikroBUS (MikroElektronika)
+   * PMod (digilent)
 
 The board comes pre-flashed with a minimal RISC-V system and firmware.
 
