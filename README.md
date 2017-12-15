@@ -92,9 +92,8 @@ Future and Microsemi have conveniently spread example content over a variety of 
 
 Microsemi provides the low-level hardware abstraction libraries that expose features of any IP you might happen to instantiate in your design.  You can generate these files from the [Firmware Catalog](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/firmware-catalog) application, which is installed by default with Libero.
 
-For a design that uses the Microsemi RISC-V core, search for 'risc' and select "Generate...".  This will make the tool spit out the C files that you can include in your SoftConsole application.  And if your design uses the SPI IP core, you'd do the same again.
+For a design that uses the Microsemi RISC-V core, search for 'risc' and select "Generate...".  This will make the tool spit out the C files that you can include in your SoftConsole application.  And if your design uses the SPI IP core, you'd do the same again for SPI.
 
 ![riscvHAL](/images/firm_cat_riscv.png)
-![spiHAL](/images/firm_cat_spi.png)
 
 **NOTE**: The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
