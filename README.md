@@ -29,11 +29,11 @@ The board comes pre-flashed with a minimal RISC-V system and firmware.
 
 It depends what you mean by "program".  You can either program the FPGA or the CPU (assuming your FPGA design includes a soft CPU such as the RISC-V).
 
-### FPGA
+### FPGA Tools
 
 In order to program the FPGA, you need to use Microsemi's Libero tool to synthesize a design and generate the FPGA programming files.  Once you've generated the programming files in Libero you use the FlashPro application to flash them into the target board's FPGA.  The FlashPro application comes with Libero.
 
-### RISC-V CPU
+### RISC-V CPU Tools
 
 In order to program the CPU you need a compiler/linker/assembler toolchain.  For RISC-V that toolchain is [GCC](https://github.com/riscv/riscv-gcc) (though folks are working on [LLVM](https://github.com/riscv/riscv-llvm)).
 
@@ -63,7 +63,7 @@ From the Microsemi catalog:
  * [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for float"?
  * [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
 
-No idea.  Looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is deprecated?) and comes in two flavors (with and without floating point).  If you have more information please let me know!
+I'm not sure.  It looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is deprecated?) and comes in two flavors (with and without floating point).  If you have more information please let me know!
 
 One difference is in the HAL files produced by the Firmware Catalog.  See below.
 
@@ -84,9 +84,9 @@ Future and Microsemi have conveniently spread example content over a variety of 
 
  * http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx
  * https://github.com/RISCV-on-Microsemi-FPGA/uCOS
-   SoftConsole project with a Micrium uC/OS-II RISC-V port
+    * SoftConsole project with a Micrium uC/OS-II RISC-V port
  * https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board
-
+    * sth
 
 ## What are the HAL files and where do they come from?
 
