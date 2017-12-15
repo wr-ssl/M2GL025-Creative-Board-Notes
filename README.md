@@ -31,33 +31,37 @@ It depends what you mean by "program".  You can either program the FPGA or the C
 
 ### FPGA
 
-In order to program the FPGA, you need to use Microsemi's Libero tool to synthesize a design and generate the programming files needed to program the FPGA.  Once you've generated the programming files in Libero, you use the FlashPro application to flash the bitfile into the target FPGA.
+In order to program the FPGA, you need to use Microsemi's Libero tool to synthesize a design and generate the FPGA programming files.  Once you've generated the programming files in Libero you use the FlashPro application to flash them into the target board's FPGA.
 
 ### RISC-V CPU
 
 In order to program the CPU you need a compiler/linker/assembler toolchain.  For RISC-V that toolchain is [GCC](https://github.com/riscv/riscv-gcc) (though folks are working on [LLVM](https://github.com/riscv/riscv-llvm)).
 
-You can either use the tools directly or use a vendor-branded Eclipse-based IDE.
-
  * [RISC-V GCC](https://github.com/riscv/riscv-gcc) is the primary compiler/linker/assembler/debugger toolchain.
  * [RISC-V OpenOCD](https://github.com/riscv/riscv-openocd) is an OpenOCD fork that supports RISC-V JTAG debug interface.
  * [GNU MCU Eclipse](https://gnu-mcu-eclipse.github.io/) is a family of Eclipse extensions for ARM and RISC-V development
 
-Other tools simply combine the above into an easy to deploy product:
+You can either use the above tools directly or use a vendor-branded Eclipse-based IDE, such as:
+
  * [Microsemi SoftConsole](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/softconsole#overview) Bundles Eclipse + GNU MCU extensions (OpenOCD and GCC) + some Microsemi-related examples.
  * [SiFive Freedom Fries Studio](https://www.sifive.com/products/tools/) is like SoftConsole but geared towards SiFive's product line.
 
+ If you're just getting started with the M2GL025 creative board then you probably want SoftConsole.
+
 ## What's the licensing deal?
 
- * **RISC-V core**: Freely available.  Note that there appear to be two Microsemi DirectCore RISC-V cores (CoreRISCV_AXI4 and MiV_RV32) -- see below.  The license verbiage for the MiV_RV32 core sounds more permissive (["This core is being released under a modified Apache 2.0 license and is freely available through Libero"](http://www.actel.com/ipdocs/MiV_RV32IMA_L1_AHB_HB.pdf)).
- * **Libero**: The [Silver/Free license level](https://www.microsemi.com/products/fpga-soc/design-resources/licensing) can program devices up to 25k LEs, which matches the capacity of the M2GL025 IGLOO2 part.  So if you don't need a bigger FPGA you're all set with the free Silver license.
+ * **RISC-V core**: Freely available.  Note that there appear to be two RISC-V cores in the Microsemi DirectCore catalog (CoreRISCV_AXI4 and MiV_RV32) -- more on that below.  The license verbiage for the MiV_RV32 core sounds more permissive (["This core is being released under a modified Apache 2.0 license and is freely available through Libero"](http://www.actel.com/ipdocs/MiV_RV32IMA_L1_AHB_HB.pdf)).
+ * **Libero**: The [Silver/Free license level](https://www.microsemi.com/products/fpga-soc/design-resources/licensing) can program devices up to 25k LEs, which matches the capacity of the M2GL025 IGLOO2 part.
  * **SoftConsole**: Free.  It's just Eclipse + MCU Eclipse extensions + GCC + OpenOCD in a bundle with some Microsemi-related examples.
 
 However, IANAL and I'm not sure about the specifics of licensing for commercial works.
 
 ## What's the difference between CoreRISCV_AXI4 and MiV_RV32 cores?
+ * [MiV_RV32IMA_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=903)
+ * [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for float"?
+ * [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
 
-No idea.  Looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is depricated?) and comes in two flavors (with and without floating point).  If you have more information please let me know!
+No idea.  Looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is deprecated?) and comes in two flavors (with and without floating point).  If you have more information please let me know!
 
 ## Do I need to purchase a separate USB FlashPro programmer to use with the creative board?
 
