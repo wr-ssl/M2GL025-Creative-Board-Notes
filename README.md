@@ -97,9 +97,6 @@ Future and Microsemi have conveniently spread example content over a variety of 
     * Includes one SoftConsole project: IGL2_RISCV_Systick_Blinky (with "Alternate application file" main.c)
       * This project does not build when I import it into SoftConsole: ![HelloWorldBuild](/images/hello_world_build_fail.png)
 
-* https://github.com/RISCV-on-Microsemi-FPGA/uCOS
-  * SoftConsole project with a Micrium uC/OS-II RISC-V port
-
 * https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board
   * Includes two Libero HDL projects (and pre-built programming files): CoreRISCV_AXI4_BaseDesign and IGL2_CoreRISCV_AXI4_TickTacToe
   * Includes two SoftConsole projects: riscv-systick-blinky and TickTackToe
@@ -110,6 +107,9 @@ Future and Microsemi have conveniently spread example content over a variety of 
 
 * https://github.com/RISCV-on-Microsemi-FPGA/Documentation
   * A small assortment of marginally useful pdfs.
+
+* https://github.com/RISCV-on-Microsemi-FPGA/uCOS
+  * SoftConsole project with a Micrium uC/OS-II RISC-V port
 
 ## What are the HAL files and where do they come from?
 
@@ -123,11 +123,86 @@ For a design that uses the Microsemi RISC-V core, search for 'risc' and select "
 
 ## How do I build and (re)program the original FPGA bitfile onto the board?
 
-Use the FlashPro applicatoin to program the .stp file from the [YellowBoard](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/) repo.
+HDL sources and pre-built FPGA programming files corresponding to the as-shipped design (Systick_Blinky) can be found in the [YellowBoard](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/) repo.  Use the FlashPro application to program the [.stp file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Programming%20the%20Target%20Device/PROC_SUBSYSTEM.stp).
 
 ## How do I build and (re)program the original RISC-V CPU firmware onto the board?
 
-As noted in the [YellowBoard](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/) repo, the original software is Systick_Blinky.  You might be tempted to think that the software lives in the 26F064B serial flash part, but it doesn't!  It's stored in the eNVM (embedded non-volatile memeory) of the IGLOO2.  The M2GL025 part has 256kB of eNVM and according to [UG0448](https://www.microsemi.com/document-portal/doc_download/132009-ug0448-igloo2-fpga-high-performance-memory-subsystem-user-guide) the eNVM base address is fixed at 0x6000_0000.
+The original firmware is in the [IGL2_RISCV_Systick_Blinky](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky) SoftConsole project.  How do you get it on the board?
 
-The linker command file [Linker_Run_from_NVM.lds](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Linker_Run_from_NVM.lds) is used when you're targeting eNVM.  If you're targeting the OpenOCD debugger then you want to link the program for RAM at 0x8000_0000 (e.g., using [microsemi-riscv-ram.ld](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/Example_Software_Projects/riscv-systick-blinky/riscv_hal/microsemi-riscv-ram.ld))
+Short answer: The CPU firmware gets programmed along with the FPGA fabric when you use FlashPro to program the YellowBoard [.stp file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Programming%20the%20Target%20Device/PROC_SUBSYSTEM.stp) mentioned above.  So you don't actually have to do anything to reload this software other than re-flash the FPGA.
 
+Longer answer: You might be tempted to think that the software lives in the 26F064B serial flash part, but it doesn't!  It's stored in the eNVM (embedded non-volatile memeory) of the IGLOO2.  The M2GL025 part has 256kB of eNVM and according to [UG0448](https://www.microsemi.com/document-portal/doc_download/132009-ug0448-igloo2-fpga-high-performance-memory-subsystem-user-guide) the eNVM base address is fixed at 0x6000_0000.  The eNVM gets programmed along with the FPGA fabric when you use FlashPro to program the target device.
+
+Suppose you want to modify the original program and load it onto the board so that it runs at power-up.  Then you'll need to do the following.
+1. Build the .hex target in SoftConsole using the [Linker_Run_from_NVM.lds](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Linker_Run_from_NVM.lds) linker command file.
+  * This linker file targets the eNVM memory at 0x6000_0000.
+  * (When you build the debug target, OpenOCD loads your program directly into ram at 0x8000_000.  So in that case you'd you the [microsemi-riscv-ram.ld](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/Example_Software_Projects/riscv-systick-blinky/riscv_hal/microsemi-riscv-ram.ld) file instead.)
+2. In Libero, double-click "Update eNVM Memory Content" in the Design Flow tab: ![eNVM0](/images/envm_update_00.png)
+  * You'll be presented with this dialog: ![eNVM1](/images/envm_update_01.png)
+  * Select the data storage region and click Edit to choose the .hex file you just built in SoftConsole: ![eNVM1](/images/envm_update_02.png)
+
+## What is the initial program counter / reset vector for the RISC-V CPU?
+
+The [privileged ISA](blob:https://riscv.org/ab5ac531-378c-4f43-ba5c-1baf025519a6) (section 3.3) says reset vector is implementation specific.
+
+Looking at our specific implementation then, the [CoreRISCV_AXI4 core user manual](http://www.actel.com/ipdocs/CoreRISCV_AXI4_HB.pdf) (section 5.1.1) says default `RESET_VECTOR_ADDR` is 0x6000_0000, and the example projects [show it configured that way](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/Modify_The_FPGA_Design/CoreRISCV_AXI4_BaseDesign/component/work/PROC_SUBSYSTEM/CORERISCV_AXI4_0/rtl/vlog/core/coreriscv_axi4.v#L153):
+
+```verilog
+parameter RESET_VECTOR_ADDR = 60000000;
+```
+
+As described in the firmware programming section above, 0x6000_0000 is the base address of the eNVM memory in the IGLOO2 and is the location of \_start/.text when using the [Linker_Run_from_NVM.lds](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Linker_Run_from_NVM.lds) linker command file.  So it makes a sensible reset vector.
+
+## Is the IGLOO2 eNVM location configurable?
+According to [UG0448](https://www.microsemi.com/document-portal/doc_download/132009-ug0448-igloo2-fpga-high-performance-memory-subsystem-user-guide) (sections 2.2, 4.1.4)... I'm not sure.  Maybe you can configure the AHB bus matrix.  I didn't go that deep.
+
+There's some related information about doing an initial copy from eNVM to SRAM in [AC421](https://www.microsemi.com/document-portal/doc_view/133704-ac421-igloo2-fpga-sram-initialization-from-envm-libero-soc-v11-7-application-note).  It doesn't apply to the creative board though.
+
+## What is the memory map of the Creative Board?
+It depends on the specific HDL implementation, but for the factory default FPGA load (Systick_Blinky), it's given here:
+
+* [README.txt](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/FPGA%20Design/IGL2_RISCV_Systick_Blinky/README.txt)
+
+I think that comes from an output Libero... maybe [subsystem.bfm](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/FPGA%20Design/IGL2_RISCV_Systick_Blinky/component/work/PROC_SUBSYSTEM/subsystem.bfm)?
+
+That's the hardware memory map.  If you're just talking about the linker areas you can look at:
+* [Linker command file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Linker_Run_from_NVM.lds)
+* [.lst file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Release/IGL2_RISCV_Systick_Blinky.lst)
+* [.map file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Release/IGL2_RISCV_Systick_Blinky.map)
+
+## How does the external serial flash / SPI memory get loaded into ram?
+It doesn't, at least not in the default design.  An SPI core is only instantiated in some of the example designs (e.g., [TicTacToe](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/Modify_The_FPGA_Design/IGL2_CoreRISCV_AXI4_TickTacToe)).  The default program is stored in the eNVM region of the IGLOO2.  See eNVM discussion above.
+
+## Simulation
+
+There are a few simulators to choose from.  Here are two.  Some others are listed [here](https://riscv.org/software-status/#simulators).
+1. [Spike](https://github.com/riscv/riscv-isa-sim) This would be the official reference simulator, if there were such a thing.
+2. [Qemu](https://github.com/riscv/riscv-qemu/issues) A Qemu fork for RISC-V.
+
+### What is pk?
+
+bare metal vs. hosted
+
+### What is the reset vector for qemu and spike simulators?
+It's the same for both, as described here: https://github.com/slavaim/riscv-notes/blob/master/bbl/boot.md
+* reset vector: 0x1000
+* memory base: 0x80000000
+There are two instructions at 0x1000, hard-coded into qemu, that do a jump to 0x80000000.
+
+## Can I change qemu's RISC-V reset vector?
+No, it's hard-coded.  See above.
+
+## How do I set the program counter manually (in gdb)?
+`set $pc = 0x80000000`
+
+
+## Other Resources
+### Vendor information
+* [Microsemi](https://www.microsemi.com/products/fpga-soc/mi-v-ecosystem#overview) Microsemi's RISC-V documentation root
+
+* **Future Electronics**
+  * [Static archive of HDL + software projects for the M2GL025 Creative Board](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx).  If you follow the "Request Demo Projects" link and submit the information, you'll get an email pointing to the board schematics and BOM in pdf format.
+  * [Buy](http://www.futureelectronics.com/en/Technologies/Product.aspx?ProductID=FUTUREM2GLEVBFUTUREELECTRONICSDEVTOOLS7091559&IM=0)
+
+* **SiFive**
+  * [GCC toolchain and SiFive's IDE](https://www.sifive.com/products/tools/)
