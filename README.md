@@ -22,7 +22,8 @@ It's a USD$99 evaluation board from Microsemi that implements a RISC-V CPU syste
 
 The board comes pre-flashed with a minimal RISC-V system and firmware.
 
-Boards are available for purchase [here](http://www.futureelectronics.com/en/Technologies/Product.aspx?ProductID=FUTUREM2GLEVBFUTUREELECTRONICSDEVTOOLS7091559&IM=0)
+[Link to Buy](http://www.futureelectronics.com/en/Technologies/Product.aspx?ProductID=FUTUREM2GLEVBFUTUREELECTRONICSDEVTOOLS7091559&IM=0)
+(I have no affiliation with any of these companies, FYI.)
 
 ## What tools do I need in order to program the board?
 
@@ -70,4 +71,6 @@ If you use the creative board design as a basis for your own design, you could l
 Fill out the "Request Demo Projects" link, submit your information, and you'll get an email with links to the board schematics and BOM in pdf format.
 
 ## What example projects are available as a starting point?
+
+## What are these HAL files and where do they come from?
 
