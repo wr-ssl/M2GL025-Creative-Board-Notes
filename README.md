@@ -2,7 +2,7 @@
 
 ![yellow board](/images/RISC-V_yellow_board.png)
 
-<img src="https://github.com/rossberger/M2GL025-Creative-Board-Notes/blob/master/images/RISC-V_yellow_board.png" alt="yellow" style="width: 200px;"/>
+<img src="https://github.com/rossberger/M2GL025-Creative-Board-Notes/blob/master/images/RISC-V_yellow_board.png" width="50">
 
 This page has my notes from tinkering with the Microsemi M2GL025 creative board.
 
