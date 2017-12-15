@@ -31,7 +31,7 @@ It depends what you mean by "program".  You can either program the FPGA or the C
 
 ### FPGA
 
-In order to program the FPGA, you need to use Microsemi's Libero tool to synthesize a design and generate the FPGA programming files.  Once you've generated the programming files in Libero you use the FlashPro application to flash them into the target board's FPGA.
+In order to program the FPGA, you need to use Microsemi's Libero tool to synthesize a design and generate the FPGA programming files.  Once you've generated the programming files in Libero you use the FlashPro application to flash them into the target board's FPGA.  The FlashPro application comes with Libero.
 
 ### RISC-V CPU
 
@@ -57,24 +57,44 @@ You can either use the above tools directly or use a vendor-branded Eclipse-base
 However, IANAL and I'm not sure about the specifics of licensing for commercial works.
 
 ## What's the difference between CoreRISCV_AXI4 and MiV_RV32 cores?
+
+From the Microsemi catalog:
  * [MiV_RV32IMA_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=903)
  * [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for float"?
  * [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
 
 No idea.  Looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is deprecated?) and comes in two flavors (with and without floating point).  If you have more information please let me know!
 
+One difference is in the HAL files produced by the Firmware Catalog.  See below.
+
 ## Do I need to purchase a separate USB FlashPro programmer to use with the creative board?
 
-No.  The board has an integrated FT4232-based USB FlashPro5 JTAG interface that works with the FlashPro application.
+No.  The board has an integrated FT4232-based USB FlashPro5 that works with the FlashPro application.  Signal-wise the integrated FlashPro connects to the IGLOO2 via JTAG, so there is nothing non-standard going on, it's just included on the board.  There is no JTAG header on the creative board.
 
 If you use the creative board design as a basis for your own design, you could leave off the FT4232 parts and just bring out the normal JTAG signals on a header for use with a [regular FlashPro4/5](https://www.microsemi.com/products/fpga-soc/design-resources/programming/flashpro#ordering).
 
 ## Where can I get board schematics?
 
  * [Future Electronics](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx)
-Fill out the "Request Demo Projects" link, submit your information, and you'll get an email with links to the board schematics and BOM in pdf format.
+Fill out the "Request Demo Projects" link, submit your information, and you'll get an email (<1min for me) with links to the board schematics and BOM in pdf format.
 
 ## What example projects are available as a starting point?
 
-## What are these HAL files and where do they come from?
+Future and Microsemi have conveniently spread example content over a variety of websites which protects you from getting information overload from any one site.p
 
+ * http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx
+ * https://github.com/RISCV-on-Microsemi-FPGA/uCOS
+   SoftConsole project with a Micrium uC/OS-II RISC-V port
+ * https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board
+
+
+## What are the HAL files and where do they come from?
+
+Microsemi provides the low-level hardware abstraction libraries that expose features of any IP you might happen to instantiate in your design.  You can generate these files from the [Firmware Catalog](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/firmware-catalog) application, which is installed by default with Libero.
+
+For a design that uses the Microsemi RISC-V core, search for 'risc' and select "Generate...".  This will make the tool spit out the C files that you can include in your SoftConsole application.  And if your design uses the SPI IP core, you'd do the same again.
+
+![riscvHAL](/images/firm_cat_riscv.png)
+![spiHAL](/images/firm_cat_spi.png)
+
+**NOTE**: The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
