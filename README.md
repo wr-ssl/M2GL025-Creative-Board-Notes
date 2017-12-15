@@ -85,7 +85,7 @@ Future and Microsemi have conveniently spread example content content content an
   * [Blinky LED](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/BlinkyIGLOO2.zip)
     * HDL-only Libero project.  No RISC-V core.  Includes pre-built programming files (.stp and .pro) so you can flash the FPGA with only [FlashPro Express](https://www.microsemi.com/products/fpga-soc/design-resources/programming/flashpro#software) if you don't want to rebuild everything in Libero.
   * [FLiR Thermal Imaging](http://www.futureelectronics.com/en/campaign/microsemi/PublishingImages/TVBLockDiagram.jpg)
-    * Just a link to a block diagram?  Ok!
+    * Wait, it's just a link to a block diagram?!?
     * Here's [more information that still isn't a .zip file](http://ftm.futureelectronics.com/2017/03/future-electronics-flir-lepton-lwir-thermal-imaging-camera-demo-on-microsemi-igloo2-creative-board/).
   * [RISC-V Tic-tac-toe](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/TicTacToe%20Demo.zip)
     * Includes two Libero HDL projects (and pre-built programming files): CoreRISCV_AXI4_BaseDesign and IGL2_CoreRISCV_AXI4_TickTacToe
@@ -93,21 +93,18 @@ Future and Microsemi have conveniently spread example content content content an
   * [Hello World](http://www1.futureelectronics.com/mailing/Microsemi/IGL2_RISC-V_Hello_World.zip)
     * Includes one HDL project: IGL2_RISCV_Systick_Blinky and pre-built .stp programming file
     * Includes one SoftConsole project: IGL2_RISCV_Systick_Blinky (with "Alternate application file" main.c)
-      * This project does not build when I import it into SoftConsole: ![HelloWorldBuild](/images/hello_world_build_fail.png)
+      * This project does not build when I import it into SoftConsole: ![HelloWorldBuild](/images/hello_world_build_fail.png)  I assume this can be fixed by updating the toolchain/builder info in the eclipse project files but I didn't try.
 
 * https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board
   * Includes two Libero HDL projects (and pre-built programming files): CoreRISCV_AXI4_BaseDesign and IGL2_CoreRISCV_AXI4_TickTacToe
   * Includes two SoftConsole projects: riscv-systick-blinky and TickTackToe
   * YellowBoard directory contains the factory-programmed HDL and firmware which appears to be our friend Systick_Blinky and uses the CoreRISCV_AXI4 core.  Programming files are also included.
 
-* https://github.com/RISCV-on-Microsemi-FPGA/riscv-hal
-  * This is the same riscv-HAL you would normally generate using the Firmware Catalog application.  Probably best to get it from the catalog instead.
-
-* https://github.com/RISCV-on-Microsemi-FPGA/Documentation
-  * A small assortment of marginally useful pdfs.
-
 * https://github.com/RISCV-on-Microsemi-FPGA/uCOS
   * SoftConsole project with a Micrium uC/OS-II RISC-V port
+
+* https://github.com/RISCV-on-Microsemi-FPGA/Documentation
+  * Not a project, but a small assortment of marginally useful pdfs related to the projects.
 
 ## What are the HAL files and where do they come from?
 
@@ -118,6 +115,8 @@ For a design that uses the Microsemi RISC-V core, search for 'risc' and select "
 ![riscvHAL](/images/firm_cat_riscv.png)
 
 **NOTE**: The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
+
+Duplicated [here](https://github.com/RISCV-on-Microsemi-FPGA/riscv-hal).  This is the same riscv-HAL you would normally generate using the Firmware Catalog application.  Probably best to get it from the catalog instead though.
 
 ## How do I build and (re)program the original FPGA bitfile onto the board?
 
