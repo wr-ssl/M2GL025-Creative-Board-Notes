@@ -1,9 +1,11 @@
 # M2GL025-Creative-Board-Notes
 
-<img src="https://github.com/rossberger/M2GL025-Creative-Board-Notes/blob/master/images/RISC-V_yellow_board.png" width="200">
-<img src="https://github.com/rossberger/M2GL025-Creative-Board-Notes/blob/master/images/Microsemi_Board_IMG_9611.jpg" width="200">
+My notes from tinkering with the Microsemi M2GL025 creative board.
 
-This page has my notes from tinkering with the Microsemi M2GL025 creative board.
+![GitHub Logo](/images/Microsemi_Board_IMG_9611_tn.jpg)
+![GitHub Logo](/images/RISC-V_yellow_board_tn.png)
+
+(Looks like it was originally done up in blue and got a new silkscreen job in 2017.  I don't see any changes to PCB routing or parts placement between the two).
 
 ## About the board
 
