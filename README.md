@@ -1,6 +1,6 @@
 # M2GL025-Creative-Board-Notes
 
-
+![yellow board](/images/RISC-V_yellow_board.png)
 
 This page has my notes from tinkering with the Microsemi M2GL025 creative board.
 
