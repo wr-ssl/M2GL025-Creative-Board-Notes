@@ -106,7 +106,7 @@ Future and Microsemi have conveniently spread example content over a variety of 
   * YellowBoard directory contains the factory-programmed HDL and firmware which appears to be our friend Systick_Blinky and uses the CoreRISCV_AXI4 core.  Programming files are also included.
 
 * https://github.com/RISCV-on-Microsemi-FPGA/riscv-hal
-  * This is the same riscv-HAL you would normally generate using the Firmware Catalog application.  Probably best to get it from the catalog instead of here.
+  * This is the same riscv-HAL you would normally generate using the Firmware Catalog application.  Probably best to get it from the catalog instead.
 
 * https://github.com/RISCV-on-Microsemi-FPGA/Documentation
   * A small assortment of marginally useful pdfs.
@@ -120,3 +120,4 @@ For a design that uses the Microsemi RISC-V core, search for 'risc' and select "
 ![riscvHAL](/images/firm_cat_riscv.png)
 
 **NOTE**: The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
+
