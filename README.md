@@ -193,7 +193,7 @@ It's the same for both, as described here: https://github.com/slavaim/riscv-note
 * reset vector: 0x1000
 * memory base: 0x80000000
 
-There are two instructions at 0x1000, hard-coded into qemu, that do a jump to 0x80000000.
+There are two instructions at 0x1000, hard-coded into qemu, that do a jump to 0x80000000.  So the effective initial PC (and the location your code should be linked to for simulation) is 0x80000000.
 
 ### Can I change qemu's RISC-V reset vector?
 No, it's hard-coded.  See above.
@@ -202,13 +202,14 @@ No, it's hard-coded.  See above.
 `(gdb) set $pc = 0x80000000`
 
 ### How do I simulate the M2GL025 Creative Board examples?
+TBD.
 
 
 ## Other Resources
 ### Vendor information
 * [Microsemi](https://www.microsemi.com/products/fpga-soc/mi-v-ecosystem#overview): RISC-V documentation root
 
-* **Future Electronics**
+* **Future Electronics**:
   * [Static archive of HDL + software projects for the M2GL025 Creative Board](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx).  If you follow the "Request Demo Projects" link and submit the information, you'll get an email pointing to the board schematics and BOM in pdf format.
   * [M2GL025 Creative Board Purchase](http://www.futureelectronics.com/en/Technologies/Product.aspx?ProductID=FUTUREM2GLEVBFUTUREELECTRONICSDEVTOOLS7091559&IM=0)
 
