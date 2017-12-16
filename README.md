@@ -171,7 +171,7 @@ That's the hardware memory map.  If you're just talking about the linker section
 ## How does the external serial flash / SPI memory get loaded into RAM?
 It doesn't, at least not in the default design.  An SPI core is only instantiated in some of the example designs (e.g., [TicTacToe](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/Modify_The_FPGA_Design/IGL2_CoreRISCV_AXI4_TickTacToe)).  The default program is stored in the eNVM region of the IGLOO2, not the serial flash.  See eNVM discussion above.
 
-If you want to read or write with the serial flash part:
+If you want to read/write the serial flash part:
 1. Make sure CORESPI is appropriately instantiated in your Libero project
 2. Generate and include the SPI HAL files in your SoftConsole project
 3. Write application code that uses the SPI HAL API.  A starting place might be the [baremetal bootloader](https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/tree/master/riscv-simple-baremetal-bootloader). (Note that this particular project doesn't run on the YellowBoard with the factory FPGA.)
