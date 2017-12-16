@@ -163,7 +163,7 @@ It depends on the specific HDL implementation, but for the factory default FPGA 
 
 I think that comes from an output of Libero... maybe [subsystem.bfm](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/FPGA%20Design/IGL2_RISCV_Systick_Blinky/component/work/PROC_SUBSYSTEM/subsystem.bfm)?
 
-That's the hardware memory map.  If you're just talking about the linker areas you can look at:
+That's the hardware memory map.  If you're just talking about the linker sections you can look at:
 * [Linker command file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Linker_Run_from_NVM.lds)
 * [.lst file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Release/IGL2_RISCV_Systick_Blinky.lst)
 * [.map file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Release/IGL2_RISCV_Systick_Blinky.map)
