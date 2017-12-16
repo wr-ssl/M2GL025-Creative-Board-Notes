@@ -1,6 +1,6 @@
 # M2GL025-Creative-Board-Notes
 
-My notes from tinkering with the Microsemi M2GL025 creative board.
+Some notes from tinkering with the Microsemi M2GL025 creative board.
 
 [![Blue Board](/images/Microsemi_Board_IMG_9611_tn.jpg)](/images/Microsemi_Board_IMG_9611.jpg)
 [![Yellow Board](/images/RISC-V_yellow_board_tn.png)](/images/RISC-V_yellow_board.png)
