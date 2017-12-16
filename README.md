@@ -179,7 +179,7 @@ If you want to read/write the serial flash part:
 ## Simulation
 
 There are a few simulators to choose from.  Here are two.  Some others are listed [here](https://riscv.org/software-status/#simulators).
-1. [Spike](https://github.com/riscv/riscv-isa-sim) This would be the official reference simulator, if there were such a thing.
+1. [Spike](https://github.com/riscv/riscv-isa-sim) This is the RISC-V reference simulator, if there's such a thing.
 2. [Qemu](https://github.com/riscv/riscv-qemu/issues) A Qemu fork for RISC-V.
 
 ### What is pk?
