@@ -205,7 +205,7 @@ No, it's hard-coded.  See above.
 TBD.
 
 
-## Other Resources
+## Additional Resources
 ### Vendor information
 * [Microsemi](https://www.microsemi.com/products/fpga-soc/mi-v-ecosystem#overview): RISC-V documentation root
 
