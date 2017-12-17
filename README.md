@@ -194,6 +194,26 @@ That's the hardware memory map.  If you're just talking about the linker section
 * [.lst file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Release/IGL2_RISCV_Systick_Blinky.lst)
 * [.map file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Release/IGL2_RISCV_Systick_Blinky.map)
 
+Or (in Linux), use `readelf -a file.elf`.
+
+```
+$ readelf -a miv-rv32ima-systick-blinky.elf
+ ...
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .text             PROGBITS        80000000 001000 001090 00  AX  0   0 16
+  [ 2] .sdata            PROGBITS        80001090 002090 000010 00  WA  0   0 16
+  [ 3] .data             PROGBITS        800010a0 0020a0 0000e0 00  WA  0   0 16
+  [ 4] .sbss             NOBITS          80001180 002180 000010 00  WA  0   0 16
+  [ 5] .bss              NOBITS          80001190 002180 000020 00  WA  0   0 16
+  [ 6] .heap             NOBITS          800011b0 002180 000800 00  WA  0   0 16
+  [ 7] .stack            NOBITS          800019b0 002180 000800 00  WA  0   0 16
+  [ 8] .debug_line       PROGBITS        00000000 002180 0025e5 00      0   0  1
+  ...
+```
+
 ## How does the external serial flash / SPI memory get loaded into RAM?
 It doesn't, at least not in the default design.  An SPI core is only instantiated in some of the example designs (e.g., [TicTacToe](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/Modify_The_FPGA_Design/IGL2_CoreRISCV_AXI4_TickTacToe)).  The default program is stored in the eNVM region of the IGLOO2, not the serial flash.  See eNVM discussion above.
 
