@@ -65,7 +65,7 @@ There are three RISC-V cores in Microsemi catalog:
 
 I'm not sure how MiV and AXI4 differ.  It looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is deprecated?) and comes in two flavors (with and without floating point).  If you have more information please let me know.
 
-One difference is in the HAL files produced by the Firmware Catalog.  See below.
+One difference is in the HAL files produced by the Firmware Catalog.  The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
 
 ## Do I need to purchase a separate USB FlashPro programmer to use with the creative board?
 
@@ -79,62 +79,77 @@ If you use the creative board design as a basis for your own design, you could l
 
 ## What example projects are available as a starting point?
 
-Future and Microsemi have conveniently spread example content content content and duplicate content across a variety of websites which protects sensitive users from getting too much information all at once.
+The very best way to get an example project that builds in SoftConsole 5.2 and runs on the YellowBoard is to use Firmware Catalog to generate it.
+  * Search for 'riscv' in Firmware Catalog
+  * Right click the latest RISC-V HAL version
+  * Select "Generate Sample Project": ![GenSampleProject](/images/firm_cat_systick.png)
+  * Open SoftConsole and choose File -> Import, Existing Projects into Workspace, and enter the directory of the files you generated above.
 
-* At [this Future page](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx) there are four (ok, three) projects available for download as .zip archives:
+As for other examples, Future and Microsemi have conveniently duplicated content across a variety of websites.  Here's a summary.  Note that most of these examples are for SoftConsole 5.1 and won't build under SoftConsole 5.2 unless you [migrate them](https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/#migrating-from-softconsole-v51-to-v52).
+
+* At [this Future page](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx) there are four (ok, three) projects available for download as .zip archives.
   * [Blinky LED](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/BlinkyIGLOO2.zip)
     * HDL-only Libero project.  No RISC-V core.  Includes pre-built programming files (.stp and .pro) so you can flash the FPGA with only [FlashPro Express](https://www.microsemi.com/products/fpga-soc/design-resources/programming/flashpro#software) if you don't want to rebuild everything in Libero.
   * [FLiR Thermal Imaging](http://www.futureelectronics.com/en/campaign/microsemi/PublishingImages/TVBLockDiagram.jpg)
     * Wait, it's just a link to a block diagram?!?
     * Here's [more information that still isn't a .zip file](http://ftm.futureelectronics.com/2017/03/future-electronics-flir-lepton-lwir-thermal-imaging-camera-demo-on-microsemi-igloo2-creative-board/).
-  * [RISC-V Tic-tac-toe](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/TicTacToe%20Demo.zip)
-    * Includes two Libero HDL projects (and pre-built programming files): CoreRISCV_AXI4_BaseDesign and IGL2_CoreRISCV_AXI4_TickTacToe
-    * Includes two SoftConsole projects: riscv-systick-blinky and TickTackToe
   * [Hello World](http://www1.futureelectronics.com/mailing/Microsemi/IGL2_RISC-V_Hello_World.zip)
     * Includes one HDL project: IGL2_RISCV_Systick_Blinky and pre-built .stp programming file
     * Includes one SoftConsole project: IGL2_RISCV_Systick_Blinky (with "Alternate application file" main.c)
-      * This project does not build when I import it into SoftConsole: ![HelloWorldBuild](/images/hello_world_build_fail.png)  I assume this can be fixed by updating the toolchain/builder info in the eclipse project files but I didn't try.
+      * This project does not build when I import it into SoftConsole 5.2: ![HelloWorldBuild](/images/hello_world_build_fail.png)
+  * [RISC-V Tic-tac-toe](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/TicTacToe%20Demo.zip)
+    * Includes two Libero HDL projects (and pre-built programming files): CoreRISCV_AXI4_BaseDesign and IGL2_CoreRISCV_AXI4_TickTacToe
+    * Includes two SoftConsole projects: riscv-systick-blinky and TickTackToe
+      * Has same issue as Hello World above: projects are for SoftConsole 5.1 and need to be migrated to 5.2.
 
 * https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board
   * Includes two Libero HDL projects (and pre-built programming files): CoreRISCV_AXI4_BaseDesign and IGL2_CoreRISCV_AXI4_TickTacToe
-  * Includes two SoftConsole projects: riscv-systick-blinky and TickTackToe
-  * YellowBoard directory contains the factory-programmed HDL and firmware which appears to be our friend Systick_Blinky and uses the CoreRISCV_AXI4 core.  Programming files are also included.
+  * Includes two SoftConsole 5.1 projects: riscv-systick-blinky and TickTackToe
+  * YellowBoard directory contains the factory-programmed HDL and firmware (Systick_Blinky) and uses the CoreRISCV_AXI4 core.  Programming files are also included.
+  * None of the SoftConsole projects will build in 5.2 without [migrating them](https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/#migrating-from-softconsole-v51-to-v52).
 
 * https://github.com/RISCV-on-Microsemi-FPGA/uCOS
-  * SoftConsole project with a Micrium uC/OS-II RISC-V port
+  * Includes one SoftConsole 5.1 project: blinky (needs migration to 5.2 in order to build)
+  * Includes riscv-uCOS-sample: This is a port of Micrium's uC/OS-II RTOS to RISC-V.
+    * DOES build under SoftConsole 5.2 - but only the Debug target.  So it's possible to load into RAM and run with OpenOCD.  The Release target isn't properly configured.
+
+* https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/
+  * Very useful bits of information about generating SoftConsole project templates from Firmware Catalog and migrating from SoftConsole 5.1 to 5.2.
 
 * https://github.com/RISCV-on-Microsemi-FPGA/Documentation
   * Not a project, but a small assortment of somewhat useful pdfs related to the projects.
 
 ## What are the HAL files and where do they come from?
 
-Microsemi provides the low-level hardware abstraction libraries that expose a C API for of any IP cores instantiated in your design.  You can generate these files from the [Firmware Catalog](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/firmware-catalog) application, which is installed by default with Libero.
+Microsemi provides the low-level hardware abstraction libraries (normally called a BSP - board support package) that expose a C API for of any IP cores instantiated in your design.  You can generate these files from the [Firmware Catalog](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/firmware-catalog) application, which is installed by default with Libero.
 
 In Firmware Catalog, for a design that uses the Microsemi RISC-V core, you'd search for 'risc' and select "Generate...".  This will make the tool spit out the C/asm files that you can include in your SoftConsole/gcc project.  Repeat as needed for any additional cores (e.g., SPI).
 
+Additionally, Firmware Catalog can be used to generate RISC-V SoftConsole project templates (see above section).
+
 **NOTE**: The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
+
+**NOTE2**: The RISC-V HAL files are duplicated at https://github.com/RISCV-on-Microsemi-FPGA/riscv-hal.  This is the same riscv-HAL you would normally generate using the Firmware Catalog application and it's probably best to get them from the catalog instead.
 
 ![riscvHAL](/images/firm_cat_riscv.png)
 
-NOTE2: The RISC-V HAL files are duplicated [here](https://github.com/RISCV-on-Microsemi-FPGA/riscv-hal).  This is the same riscv-HAL you would normally generate using the Firmware Catalog application.  Probably best to get it from the catalog instead though.
+## How do I restore the original as-shipped FPGA bitfile onto the board?
 
-## How do I build and (re)program the original FPGA bitfile onto the board?
+HDL sources and pre-built FPGA programming files corresponding to the as-shipped design (Systick_Blinky) can be found in the [YellowBoard folder of the M2GL025-Creative-Board repo](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/).  Use the FlashPro application to program the [.stp file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Programming%20the%20Target%20Device/PROC_SUBSYSTEM.stp).
 
-HDL sources and pre-built FPGA programming files corresponding to the as-shipped design (Systick_Blinky) can be found in the [YellowBoard](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/) repo.  Use the FlashPro application to program the [.stp file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Programming%20the%20Target%20Device/PROC_SUBSYSTEM.stp).
-
-## How do I build and (re)program the original RISC-V CPU firmware onto the board?
+## How do I restore the original as-shipped RISC-V CPU firmware onto the board?
 
 The original firmware is in the [IGL2_RISCV_Systick_Blinky](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky) SoftConsole project.  How do you get it on the board?
 
 **Short answer**: The CPU firmware gets programmed along with the FPGA fabric when you use FlashPro to program the YellowBoard [.stp file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Programming%20the%20Target%20Device/PROC_SUBSYSTEM.stp) mentioned above.  So you don't actually have to do anything to reload this software other than re-flash the FPGA.
 
-**Longer answer**: You might be tempted to think that the software lives in the 26F064B serial flash part, but it doesn't!  It's stored in the eNVM (embedded non-volatile memeory) of the IGLOO2.  The M2GL025 part has 256kB of eNVM and according to [UG0448](https://www.microsemi.com/document-portal/doc_download/132009-ug0448-igloo2-fpga-high-performance-memory-subsystem-user-guide) the eNVM base address is fixed at 0x6000_0000.  The eNVM gets programmed along with the FPGA fabric when you use FlashPro to program the target device.
+**Longer answer**: You might be tempted to think that the software lives in the 26F064B serial flash part, but it doesn't!  It's stored in the eNVM (embedded non-volatile memeory) of the IGLOO2.  The M2GL025 part has 256kB of eNVM at base address is fixed at 0x6000_0000.  The eNVM gets programmed along with the FPGA fabric when you use FlashPro to program the target device.
 
-Suppose you want to modify the original program and load it onto the board so that it runs at power-up.  Then you'll need to do the following.
-1. Build the .hex target in SoftConsole using the [Linker_Run_from_NVM.lds](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Linker_Run_from_NVM.lds) linker command file.
-  * This linker file targets the eNVM memory at 0x6000_0000.
-  * (When you build the debug target, OpenOCD loads your program directly into ram at 0x8000_000.  So for JTAG RAM only debugging you'd use the [microsemi-riscv-ram.ld](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/Example_Software_Projects/riscv-systick-blinky/riscv_hal/microsemi-riscv-ram.ld) file instead.)
-2. In Libero, double-click "Update eNVM Memory Content" in the Design Flow tab: ![eNVM0](/images/envm_update_00.png)
+## How do I load new CPU firmware so that it runs at power up?
+
+1. Setup a SoftConsole 5.2 project with your software.
+2. Build the Release target.  This will use a linker command file that links the code at 0x6000_0000 (eNVM base) as opposed to RAM base 0x8000_0000.  If you use Firmware Catalog to generate your SoftConsole project template, the Release target uses the microsemi-riscv-igloo2.ld linker file.  The build result is a .hex file.
+3. In Libero, double-click "Update eNVM Memory Content" in the Design Flow tab: ![eNVM0](/images/envm_update_00.png)
   * You'll be presented with this dialog: ![eNVM1](/images/envm_update_01.png)
   * Select the data storage region and click Edit to choose the .hex file you just built in SoftConsole: ![eNVM1](/images/envm_update_02.png)
 3. Generate the programming files in Libero and program the target with FlashPro as usual.
