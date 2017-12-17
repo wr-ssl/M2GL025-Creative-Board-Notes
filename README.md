@@ -270,7 +270,18 @@ You can simulate the examples in qemu as long as they don't use memory mapped IO
 ```
 ./qemu-system-riscv32 -S -s -kernel ~/tmp/riscv-tools/miv-rv32ima-systick-blinky.elf -nographic
 ```
-add `-d cpu,exec` if you'd like qemu to dump debug info as the program executes.
+  * `-S              freeze CPU at startup (use 'c' to start execution)`
+  * `-s              shorthand for -gdb tcp::1234` -- Starts gdb server on localhost:1234
+Optiionally add `-d cpu,exec` if you'd like qemu to dump debug info as the program executes.
+5. In another console:
+```
+riscv64-unknown-elf-gdb miv-rv32ima-systick-blinky.elf
+(gdb) target remote localhost:1234
+```
+I've had some luck using [gdbgui](https://github.com/cs01/gdbgui):
+```
+gdbgui -r -n -g /path/to/riscv64-unknown-elf-gdb miv-rv32ima-systick-blinky.elf
+```
 
 
 qemu currently emulates the following risc-v "boards", which are specified with the `-machine` option:
