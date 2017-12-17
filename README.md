@@ -123,15 +123,18 @@ As for other examples, Future and Microsemi have conveniently duplicated content
 
 For many cores in their IP catalog, Microsemi provides low-level hardware abstraction libraries (perhaps more aptly called a BSP) that expose a C API for the core's functionality.  You can generate these HAL files from the [Firmware Catalog](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/firmware-catalog) application, which is installed by default with Libero.
 
+![riscvHAL](/images/firm_cat_riscv.png)
+
 For example, for a design that uses the Microsemi RISC-V core, you'd search in Firmware Catalog for 'risc' and select "Generate...".  This will make the tool spit out the C/asm files that you can include in your SoftConsole/gcc project.  Repeat as needed for any additional cores (e.g., SPI).
 
-Additionally, Firmware Catalog can be used to generate RISC-V SoftConsole project templates (see above section) which include the HAL files.
+Additionally, Firmware Catalog can be used to generate RISC-V SoftConsole project templates which include the HAL files.
+
+![GenSampleProject](/images/firm_cat_systick.png)
 
 **NOTE**: The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
 
 **NOTE2**: The RISC-V HAL files are duplicated at https://github.com/RISCV-on-Microsemi-FPGA/riscv-hal.  This is the same riscv-HAL you would normally generate using the Firmware Catalog application and it's probably best to get them from the catalog instead.
 
-![riscvHAL](/images/firm_cat_riscv.png)
 
 ## How do I restore the original as-shipped FPGA bitfile onto the board?
 
