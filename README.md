@@ -23,7 +23,7 @@ It's a USD$99 evaluation board from Microsemi that implements a RISC-V CPU syste
 The board comes pre-flashed with a minimal RISC-V system and firmware.
 
 [Link to Buy](http://www.futureelectronics.com/en/Technologies/Product.aspx?ProductID=FUTUREM2GLEVBFUTUREELECTRONICSDEVTOOLS7091559&IM=0)
-(I have no affiliation with any of these companies, FYI.)
+(I have no affiliation with any of these companies)
 
 ## What tools do I need in order to program the board?
 
