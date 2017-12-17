@@ -280,18 +280,17 @@ Optionally add `-d cpu,exec` if you'd like qemu to dump debug info as the progra
 riscv64-unknown-elf-gdb miv-rv32ima-systick-blinky.elf
 (gdb) target remote localhost:1234
 ```
-I've had some luck using [gdbgui](https://github.com/cs01/gdbgui):
+I've also had some luck using [gdbgui](https://github.com/cs01/gdbgui):
 ```
 gdbgui -r -n -g /path/to/riscv64-unknown-elf-gdb miv-rv32ima-systick-blinky.elf
 ```
-
 
 qemu currently emulates the following risc-v "boards", which are specified with the `-machine` option:
 * SiFive e300 `-machine sifive_e300` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/sifive_e300.c#L59))
 * Spike v1.10 `-machine spike_v1.10` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/spike_v1_10.c#L56))
 * Spike v1.09 `-machine spike_v1.09` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/spike_v1_09.c#L56))
 
-If your program accesses memory outside of these mapped regions, qemu will exit abruptly with an error similar to:
+If your program accesses memory outside your board's memory regions, qemu will exit abruptly with an error similar to:
 ```
     unassigned address not implemented for riscv
     are you trying to fetch instructions from an MMIO page?
