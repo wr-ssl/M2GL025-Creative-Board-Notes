@@ -194,7 +194,7 @@ That's the hardware memory map.  If you're just talking about the linker section
 * [.lst file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Release/IGL2_RISCV_Systick_Blinky.lst)
 * [.map file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Release/IGL2_RISCV_Systick_Blinky.map)
 
-Or (in Linux), use `readelf -a file.elf`.
+Or (in Linux), use `readelf -a file.elf`:
 
 ```
 $ readelf -a miv-rv32ima-systick-blinky.elf
@@ -225,7 +225,7 @@ If you want to read/write the serial flash part:
 ## Simulation
 
 There are a few simulators to choose from.  Here are two.  Some others are listed [here](https://riscv.org/software-status/#simulators).
-1. [Spike](https://github.com/riscv/riscv-isa-sim) This is the RISC-V reference simulator, if there's such a thing.
+1. [Spike](https://github.com/riscv/riscv-isa-sim) This is the RISC-V ISA reference simulator
 2. [Qemu](https://github.com/riscv/riscv-qemu/issues) A Qemu fork for RISC-V.
 
 ### What is pk?
@@ -248,12 +248,24 @@ No, it's hard-coded.  See above.
 `(gdb) set $pc = 0x80000000`
 
 ### How do I simulate the M2GL025 Creative Board examples?
-TBD.
+You can simulate the examples in qemu as long as they don't use memory mapped IO at locations qemu doesn't know about.
 
+qemu currently emulates the following risc-v "boards", which are specified with the `-machine` option:
+* SiFive e300 `-machine sifive_e300` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/sifive_e300.c#L59))
+* Spike `-machine spike_v1.10` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/spike_v1_10.c#L56))
+* Spike `-machine spike_v1.09` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/spike_v1_09.c#L56))
+
+If your program accesses memory outside of these mapped regions, qemu will exit abruptly with an error similar to:
+```
+    unassigned address not implemented for riscv
+    are you trying to fetch instructions from an MMIO page?
+    unassigned Address: 00000000fffffff8
+```
 
 ## Additional Resources
 ### Vendor information
-* [Microsemi](https://www.microsemi.com/products/fpga-soc/mi-v-ecosystem#overview): RISC-V documentation root
+* **Microsemi**:
+  * [RISC-V documentation root](https://www.microsemi.com/products/fpga-soc/mi-v-ecosystem#overview)
 
 * **Future Electronics**:
   * [Static archive of HDL + software projects for the M2GL025 Creative Board](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx).  If you follow the "Request Demo Projects" link and submit the information, you'll get an email pointing to the board schematics and BOM in pdf format.
