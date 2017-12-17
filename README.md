@@ -280,7 +280,7 @@ Optionally add `-d cpu,exec` if you'd like qemu to dump debug info as the progra
 riscv64-unknown-elf-gdb miv-rv32ima-systick-blinky.elf
 (gdb) target remote localhost:1234
 ```
-I've also had some luck using [gdbgui](https://github.com/cs01/gdbgui):
+Alternatively, you could use [gdbgui](https://github.com/cs01/gdbgui):
 ```
 gdbgui -r -n -g /path/to/riscv64-unknown-elf-gdb miv-rv32ima-systick-blinky.elf
 ```
