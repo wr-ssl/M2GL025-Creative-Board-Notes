@@ -180,6 +180,8 @@ You have to drill down:
   * HPMS_0_sb
     * HPMS_0_sb_HPMS ![HPMS_0_sb_HPMS](/images/hpms_envm.png)
 
+Double-clicking the ENVM component will take you into the same "Update eNVM Memory Content" dialog as the Design Flow tab.  This allows you to specify which firmware .hex file to flash into the IGLOO2.  (Make sure the firmware is built using the Release target in SoftConsole, so that it's linked at 0x6000_0000, the eNVM base address).
+
 ## What is the memory map of the Creative Board?
 It depends on the specific HDL implementation, but for the factory default FPGA load (Systick_Blinky), it's given here:
 
