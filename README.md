@@ -178,7 +178,7 @@ There's some related information about doing an initial copy from eNVM to SRAM i
 You have to drill down:
 * PROC_SUBSYSTEM
   * HPMS_0_sb
-    * HPMS_0_sb_HPMS ![HPMS_0_sb_HPMS](/imaages/hpms_envm.png)
+    * HPMS_0_sb_HPMS ![HPMS_0_sb_HPMS](/images/hpms_envm.png)
 
 ## What is the memory map of the Creative Board?
 It depends on the specific HDL implementation, but for the factory default FPGA load (Systick_Blinky), it's given here:
