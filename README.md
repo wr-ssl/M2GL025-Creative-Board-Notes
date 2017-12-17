@@ -60,16 +60,16 @@ However, IANAL and I'm not sure about the specifics of licensing for commercial 
 
 There are three RISC-V cores in Microsemi catalog:
  * [MiV_RV32IMA_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=903)
- * [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for float"?
+ * [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for float" -- but the documents don't mention it!
  * [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
 
 I'm not sure how MiV and AXI4 differ.  It looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is deprecated?) and comes in two flavors (with and without floating point).  If you have more information please let me know.
 
-One difference is in the HAL files produced by the Firmware Catalog.  The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
+One difference is in the HAL files produced by the Firmware Catalog.  The RISC-V HAL v2.0.104 is for the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
 
 ## Do I need to purchase a separate USB FlashPro programmer to use with the creative board?
 
-No.  The board has an integrated FT4232-based USB FlashPro5 that works with the FlashPro application.  Signal-wise the integrated FlashPro connects to the IGLOO2 via JTAG, so there is nothing non-standard going on, it's just included on the board.  There is no JTAG header on the creative board.
+No.  The board has an integrated FT4232-based USB FlashPro5 that works with the FlashPro application.  Signal-wise the integrated FlashPro connects to the IGLOO2 via standard JTAG -- it's just not detachable, and there is no JTAG header on the creative board.
 
 If you use the creative board design as a basis for your own design, you could leave off the FT4232 parts and just bring out the normal JTAG signals on a header for use with a [regular FlashPro4/5](https://www.microsemi.com/products/fpga-soc/design-resources/programming/flashpro#ordering).
 
@@ -82,10 +82,10 @@ If you use the creative board design as a basis for your own design, you could l
 The very best way to get an example project that builds in SoftConsole 5.2 and runs on the YellowBoard is to use Firmware Catalog to generate it.
   * Search for 'riscv' in Firmware Catalog
   * Right click the latest RISC-V HAL version
-  * Select "Generate Sample Project": ![GenSampleProject](/images/firm_cat_systick.png)
+  * Select "Generate Sample Project", choose your project, and save the files to disk. ![GenSampleProject](/images/firm_cat_systick.png)
   * Open SoftConsole and choose File -> Import, Existing Projects into Workspace, and enter the directory of the files you generated above.
 
-As for other examples, Future and Microsemi have conveniently duplicated content across a variety of websites.  Here's a summary.  Note that most of these examples are for SoftConsole 5.1 and won't build under SoftConsole 5.2 unless you [migrate them](https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/#migrating-from-softconsole-v51-to-v52).
+As for other examples, Future and Microsemi have conveniently duplicated content across a variety of websites.  Here's a summary of what's out there.  Note that most of these examples are for SoftConsole 5.1 and won't build under SoftConsole 5.2 unless you [migrate them](https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/#migrating-from-softconsole-v51-to-v52).
 
 * At [this Future page](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx) there are four (ok, three) projects available for download as .zip archives.
   * [Blinky LED](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/BlinkyIGLOO2.zip)
@@ -121,7 +121,7 @@ As for other examples, Future and Microsemi have conveniently duplicated content
 
 ## What are the HAL files and where do they come from?
 
-Microsemi provides the low-level hardware abstraction libraries (normally called a BSP - board support package) that expose a C API for of any IP cores instantiated in your design.  You can generate these files from the [Firmware Catalog](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/firmware-catalog) application, which is installed by default with Libero.
+Microsemi provides the low-level hardware abstraction libraries (perhaps more aptly called a BSP) that expose a C API for of any IP cores instantiated in your design.  You can generate these files from the [Firmware Catalog](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/firmware-catalog) application, which is installed by default with Libero.
 
 In Firmware Catalog, for a design that uses the Microsemi RISC-V core, you'd search for 'risc' and select "Generate...".  This will make the tool spit out the C/asm files that you can include in your SoftConsole/gcc project.  Repeat as needed for any additional cores (e.g., SPI).
 
