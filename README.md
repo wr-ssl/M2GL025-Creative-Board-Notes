@@ -248,12 +248,35 @@ No, it's hard-coded.  See above.
 `(gdb) set $pc = 0x80000000`
 
 ### How do I simulate the M2GL025 Creative Board examples?
+
 You can simulate the examples in qemu as long as they don't use memory mapped IO at locations qemu doesn't know about.
+
+1. Use Firmware Catalog to create an example SoftConsole project
+2. Comment out any code that would access MMIO regions qemu doesn't know about.  E.g., from the systick-blinky example:
+```
+//    PLIC_init();
+//    GPIO_init(&g_gpio_in, COREGPIO_IN_BASE_ADDR, GPIO_APB_32_BITS_BUS);
+//    GPIO_init(&g_gpio_out, COREGPIO_OUT_BASE_ADDR, GPIO_APB_32_BITS_BUS);
+//    UART_init(&g_uart,
+//              COREUARTAPB0_BASE_ADDR,
+//              BAUD_VALUE_115200,
+//              (DATA_8_BITS | NO_PARITY));
+//
+//    UART_polled_tx_string(&g_uart, (const uint8_t *)g_hello_msg);
+//    SysTick_Config(SYS_CLK_FREQ);
+```
+3. Build the Debug target so that the resulting .elf file is linked at 0x8000_0000.
+4. Invoke qemu:
+```
+./qemu-system-riscv32 -S -s -kernel ~/tmp/riscv-tools/miv-rv32ima-systick-blinky.elf -nographic
+```
+add `-d cpu,exec` if you'd like qemu to dump debug info as the program executes.
+
 
 qemu currently emulates the following risc-v "boards", which are specified with the `-machine` option:
 * SiFive e300 `-machine sifive_e300` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/sifive_e300.c#L59))
-* Spike `-machine spike_v1.10` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/spike_v1_10.c#L56))
-* Spike `-machine spike_v1.09` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/spike_v1_09.c#L56))
+* Spike v1.10 `-machine spike_v1.10` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/spike_v1_10.c#L56))
+* Spike v1.09 `-machine spike_v1.09` ([memory map](https://github.com/riscv/riscv-qemu/blob/master/hw/riscv/spike_v1_09.c#L56))
 
 If your program accesses memory outside of these mapped regions, qemu will exit abruptly with an error similar to:
 ```
