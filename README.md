@@ -121,11 +121,11 @@ As for other examples, Future and Microsemi have conveniently duplicated content
 
 ## What are the HAL files and where do they come from?
 
-Microsemi provides the low-level hardware abstraction libraries (perhaps more aptly called a BSP) that expose a C API for of any IP cores instantiated in your design.  You can generate these files from the [Firmware Catalog](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/firmware-catalog) application, which is installed by default with Libero.
+For many cores in their IP catalog, Microsemi provides low-level hardware abstraction libraries (perhaps more aptly called a BSP) that expose a C API for the core's functionality.  You can generate these HAL files from the [Firmware Catalog](https://www.microsemi.com/products/fpga-soc/design-resources/design-software/firmware-catalog) application, which is installed by default with Libero.
 
-In Firmware Catalog, for a design that uses the Microsemi RISC-V core, you'd search for 'risc' and select "Generate...".  This will make the tool spit out the C/asm files that you can include in your SoftConsole/gcc project.  Repeat as needed for any additional cores (e.g., SPI).
+For example, for a design that uses the Microsemi RISC-V core, you'd search in Firmware Catalog for 'risc' and select "Generate...".  This will make the tool spit out the C/asm files that you can include in your SoftConsole/gcc project.  Repeat as needed for any additional cores (e.g., SPI).
 
-Additionally, Firmware Catalog can be used to generate RISC-V SoftConsole project templates (see above section).
+Additionally, Firmware Catalog can be used to generate RISC-V SoftConsole project templates (see above section) which include the HAL files.
 
 **NOTE**: The RISC-V HAL v2.0.104 is to be used with the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
 
