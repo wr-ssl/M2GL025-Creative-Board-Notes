@@ -272,7 +272,9 @@ You can simulate the examples in qemu as long as they don't use memory mapped IO
 ```
   * `-S              freeze CPU at startup (use 'c' to start execution)`
   * `-s              shorthand for -gdb tcp::1234` -- Starts gdb server on localhost:1234
-Optiionally add `-d cpu,exec` if you'd like qemu to dump debug info as the program executes.
+
+Optionally add `-d cpu,exec` if you'd like qemu to dump debug info as the program executes.
+
 5. In another console:
 ```
 riscv64-unknown-elf-gdb miv-rv32ima-systick-blinky.elf
