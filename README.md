@@ -141,11 +141,11 @@ HDL sources and pre-built FPGA programming files corresponding to the as-shipped
 
 ## How do I restore the original as-shipped RISC-V CPU firmware onto the board?
 
-The original firmware is in the [IGL2_RISCV_Systick_Blinky](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky) SoftConsole project.  How do you get it on the board?
+The CPU firmware is not stored in the 26F064B serial flash part as you might think -- it's flashed into the IGLOO2's eNVM memory instead.  This is done at the same time the FPGA fabric is flashed with FlashPro.
 
-**Short answer**: The CPU firmware gets programmed along with the FPGA fabric when you use FlashPro to program the YellowBoard [.stp file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Programming%20the%20Target%20Device/PROC_SUBSYSTEM.stp) mentioned above.  So you don't actually have to do anything to reload this software other than re-flash the FPGA.
+Sources and binaries for the as-shipped firmware are [here](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/tree/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky).
 
-**Longer answer**: You might be tempted to think that the software lives in the 26F064B serial flash part, but it doesn't!  It's stored in the eNVM (embedded non-volatile memeory) of the IGLOO2.  The M2GL025 part has 256kB of eNVM at base address is fixed at 0x6000_0000.  The eNVM gets programmed along with the FPGA fabric when you use FlashPro to program the target device.
+So the short answer is that the as-shipped firmware is restored when you use FlashPro to program the YellowBoard [.stp file](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Programming%20the%20Target%20Device/PROC_SUBSYSTEM.stp) mentioned above.
 
 ## How do I load new CPU firmware so that it runs at power up?
 
@@ -172,6 +172,13 @@ As described in the firmware programming section above, `0x6000_0000` is the bas
 According to [UG0448](https://www.microsemi.com/document-portal/doc_download/132009-ug0448-igloo2-fpga-high-performance-memory-subsystem-user-guide) (sections 2.2, 4.1.4)... I'm not sure.  Maybe you can configure the AHB bus matrix.  I didn't go that deep.
 
 There's some related information about doing an initial copy from eNVM to SRAM in [AC421](https://www.microsemi.com/document-portal/doc_view/133704-ac421-igloo2-fpga-sram-initialization-from-envm-libero-soc-v11-7-application-note).  It doesn't apply to the creative board though.
+
+## Where is the eNVM component located in the Libero design?
+
+You have to drill down:
+* PROC_SUBSYSTEM
+  * HPMS_0_sb
+    * HPMS_0_sb_HPMS ![HPMS_0_sb_HPMS](/imaages/hpms_envm.png)
 
 ## What is the memory map of the Creative Board?
 It depends on the specific HDL implementation, but for the factory default FPGA load (Systick_Blinky), it's given here:
