@@ -59,10 +59,10 @@ However, IANAL and I'm not sure about the specifics of licensing for commercial 
 ## What's the difference between CoreRISCV_AXI4 and MiV_RV32 cores?
 
 There are three RISC-V cores in Microsemi catalog:
+* [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
 * [MiV_RV32IMA_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=903)
 * [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for single precision floating point" -- the documentation pdfs don't mention this fact, but the Libero catalog does:
   * ![miv_float](/images/miv_float.png)
-* [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
 
 According to Microsemi, "MiV core is the replacement for the original CoreRISCV_AIX4", and that they are "discontinuing the original core moving onto the Mi-V platform".
 
@@ -80,19 +80,21 @@ If you use the creative board design as a basis for your own design, you could l
 
 ## What example projects are available as a starting point?
 
-The very best way to get an example project that builds in SoftConsole 5.2 and runs on the YellowBoard is to use Firmware Catalog to generate it.
+To get started with a RISC-V HDL design, a good starting place is [TU0775](https://www.microsemi.com/document-portal/doc_download/136945-tu0775-polarfire-fpga-building-a-mi-v-processor-subsystem-tutorial).  This is a fairly complete guide to building an Mi-V based system.  It's written with the PolarFire FPGA in mind, but generally applies to the IGLOO2 as well.  There are also a few ready-made example HDL projects listed below.
+
+To get started developing RISC-V software with SoftConsole, the best way to get started is to use Firmware Catalog to generate an example SoftConsole 5.2 project.
   * Search for 'riscv' in Firmware Catalog
   * Right click the latest RISC-V HAL version
   * Select "Generate Sample Project", choose your project, and save the files to disk. ![GenSampleProject](/images/firm_cat_systick.png)
   * Open SoftConsole and choose File -> Import, Existing Projects into Workspace, and enter the directory of the files you generated above.
 
-As for other examples, Future and Microsemi have conveniently duplicated content across a variety of websites.  Here's a summary of what's out there.  Note that most of these examples are for SoftConsole 5.1 and won't build under SoftConsole 5.2 unless you [migrate them](https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/#migrating-from-softconsole-v51-to-v52).
+As for other Libero / SoftConsole project examples, below is a list of everything I could find online.  Note that most of these examples are for SoftConsole 5.1 and won't build under SoftConsole 5.2 unless you [migrate them](https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/#migrating-from-softconsole-v51-to-v52).  And they also use the older AXI4 core.
 
 * At [this Future page](http://www.futureelectronics.com/en/campaign/microsemi/Pages/CreativeDevelopmentBoard.aspx) there are four (ok, three) projects available for download as .zip archives.
   * [Blinky LED](http://www.futureelectronics.com/en/manufacturers/microsemi/Documents/BlinkyIGLOO2.zip)
     * HDL-only Libero project.  No RISC-V core.  Includes pre-built programming files (.stp and .pro) so you can flash the FPGA with only [FlashPro Express](https://www.microsemi.com/products/fpga-soc/design-resources/programming/flashpro#software) if you don't want to rebuild everything in Libero.
   * [FLiR Thermal Imaging](http://www.futureelectronics.com/en/campaign/microsemi/PublishingImages/TVBLockDiagram.jpg)
-    * Wait, it's just a link to a block diagram?!?
+    * It's just a link to a block diagram .jpg...
     * Here's [more information that still isn't a .zip file](http://ftm.futureelectronics.com/2017/03/future-electronics-flir-lepton-lwir-thermal-imaging-camera-demo-on-microsemi-igloo2-creative-board/).
   * [Hello World](http://www1.futureelectronics.com/mailing/Microsemi/IGL2_RISC-V_Hello_World.zip)
     * Includes one HDL project: IGL2_RISCV_Systick_Blinky and pre-built .stp programming file
@@ -116,9 +118,6 @@ As for other examples, Future and Microsemi have conveniently duplicated content
 
 * https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/
   * Very useful bits of information about generating SoftConsole project templates from Firmware Catalog and migrating from SoftConsole 5.1 to 5.2.
-
-* https://github.com/RISCV-on-Microsemi-FPGA/Documentation
-  * Not a project, but a small assortment of somewhat useful pdfs related to the projects.
 
 ## What are the HAL files and where do they come from?
 
