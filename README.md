@@ -63,9 +63,9 @@ There are three RISC-V cores in Microsemi catalog:
  * [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for float" -- but the documents don't mention it!
  * [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
 
-I'm not sure how MiV and AXI4 differ.  It looks like MiV is the most recent version (does that mean CoreRISCV_AXI4 is deprecated?) and comes in two flavors (with and without floating point).  If you have more information please let me know.
+According to Microsemi, "MiV core is the replacement for the original CoreRISCV_AIX4", and that they are "discontinuing the original core moving onto the Mi-V platform".
 
-One difference is in the HAL files produced by the Firmware Catalog.  The RISC-V HAL v2.0.104 is for the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
+If you do use the older AXI4 core, be aware that the HAL files produced by the Firmware Catalog differ for AXI4 and MiV cores.  The RISC-V HAL v2.0.104 is for the RISC-V_AXI4 core, while version >= 2.1.101 work with the MiV-RV32 cores, according to the HAL User Guide pdfs.
 
 ## Do I need to purchase a separate USB FlashPro programmer to use with the creative board?
 
