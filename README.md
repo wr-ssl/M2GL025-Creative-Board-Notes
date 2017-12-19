@@ -169,7 +169,6 @@ parameter RESET_VECTOR_ADDR = 60000000;
 As described in the firmware programming section above, `0x6000_0000` is the base address of the eNVM memory in the IGLOO2 and is the location of \_start/.text when using the [Linker_Run_from_NVM.lds](https://github.com/RISCV-on-Microsemi-FPGA/M2GL025-Creative-Board/blob/master/YellowBoard/Software%20project/IGL2_RISCV_Systick_Blinky/Linker_Run_from_NVM.lds) linker command file.  So it makes a sense as the reset vector!
 
 ## Is the IGLOO2 eNVM memory base address configurable?
-According to [UG0448](https://www.microsemi.com/document-portal/doc_download/132009-ug0448-igloo2-fpga-high-performance-memory-subsystem-user-guide) (sections 2.2, 4.1.4)... I'm not sure.  Maybe you can configure the AHB bus matrix.  I didn't go that deep.
 
 There's some related information about doing an initial copy from eNVM to SRAM in [AC421](https://www.microsemi.com/document-portal/doc_view/133704-ac421-igloo2-fpga-sram-initialization-from-envm-libero-soc-v11-7-application-note).  It doesn't apply to the creative board though.
 
@@ -220,7 +219,7 @@ It doesn't, at least not in the default design.  An SPI core is only instantiate
 If you want to read/write the serial flash part:
 1. Make sure CORESPI is appropriately instantiated in your Libero project
 2. Generate and include the SPI HAL files in your SoftConsole project
-3. Write application code that uses the SPI HAL API.  A starting place might be the [baremetal bootloader](https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/tree/master/riscv-simple-baremetal-bootloader). (Note that this particular project doesn't run on the YellowBoard with the factory FPGA.)
+3. Write application code that uses the SPI HAL API.  A starting place might be the [baremetal bootloader](https://github.com/RISCV-on-Microsemi-FPGA/SoftConsole/tree/master/riscv-simple-baremetal-bootloader). (Note that this particular project doesn't run on the YellowBoard with the default FPGA bitfile.)
 
 ## Simulation
 
