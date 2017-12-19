@@ -59,9 +59,10 @@ However, IANAL and I'm not sure about the specifics of licensing for commercial 
 ## What's the difference between CoreRISCV_AXI4 and MiV_RV32 cores?
 
 There are three RISC-V cores in Microsemi catalog:
- * [MiV_RV32IMA_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=903)
- * [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for single precision floating point" -- the documentation pdfs don't mention this fact, but the Libero catalog does: ![miv_float](/images/miv_float.png)
- * [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
+* [MiV_RV32IMA_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=903)
+* [MiV_RV32IMAF_L1_AHB](http://soc.microsemi.com/products/ip/search/detail.aspx?id=904) "F is for single precision floating point" -- the documentation pdfs don't mention this fact, but the Libero catalog does:
+  * ![miv_float](/images/miv_float.png)
+* [RISC-V_AXI4](http://soc.microsemi.com/products/ip/search/detail.aspx?id=896)
 
 According to Microsemi, "MiV core is the replacement for the original CoreRISCV_AIX4", and that they are "discontinuing the original core moving onto the Mi-V platform".
 
