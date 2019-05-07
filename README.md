@@ -15,6 +15,7 @@ It's a USD$99 evaluation board from Microsemi that implements a RISC-V CPU syste
    * 256 KB eNVM (embedded non-volatile flash memory)
  * 64MB DDR2 SDRAM (Alliance AS4C32M16D2A-25BCN)
  * 8MB SPI flash (Microchip 26F064B)
+ * 50MHz clock input
  * Integrated FT4232-based FlashPro5 USB JTAG adapter
  * Pin headers compatible with various popular hobbyist boards:
    * Arduino
